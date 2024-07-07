@@ -24,8 +24,7 @@ namespace Microsoft.Xna.Framework.Input
         {
             int x, y;
             var winFlags = Sdl.Window.GetWindowFlags(window.Handle);
-            var state = Sdl.Mouse.GetGlobalState(out x, out y);
-            var clientBounds = window.ClientBounds;
+            var state = Sdl.Mouse.GetState(out x, out y);
 
             window.MouseState.LeftButton = (state & Sdl.Mouse.Button.Left) != 0 ? ButtonState.Pressed : ButtonState.Released;
             window.MouseState.MiddleButton = (state & Sdl.Mouse.Button.Middle) != 0 ? ButtonState.Pressed : ButtonState.Released;
@@ -36,8 +35,8 @@ namespace Microsoft.Xna.Framework.Input
             window.MouseState.HorizontalScrollWheelValue = ScrollX;
             window.MouseState.ScrollWheelValue = ScrollY;
 
-            window.MouseState.X = x - clientBounds.X;
-            window.MouseState.Y = y - clientBounds.Y;
+            window.MouseState.X = x;
+            window.MouseState.Y = y;
 
             return window.MouseState;
         }
